@@ -10,13 +10,13 @@ router = APIRouter()
 @router.get("/")
 def read_root():
     """Description."""
-    return {"data": "heeeeelp"}
+    return {"data": "heeelp"}
 
 
 @router.post("/user/add")
-def add_user(user_login: str, user_password: str):
+def add_user(login: str, password: str):
     """Description."""
-    db.add_user(user_login, user_password)
+    return db.add_user(login, password)
 
 
 # @router.post("/user/list/add")
@@ -26,9 +26,9 @@ def add_user(user_login: str, user_password: str):
 
 
 @router.get("/user/tasks")
-def get_tasks(user_login: str):
+def get_tasks(login: str):
     """Description."""
-    tasks = db.get_tasks(user_login)
+    tasks = db.get_tasks(login)
     return [to_json(task) for task in tasks]
 
 # @router.get("/user/lists")
@@ -38,9 +38,9 @@ def get_tasks(user_login: str):
 
 
 @router.get("/user/task/add")
-def add_task(user_login: str, task_name: str, task_status: str, task_deadline: int):
+def add_task(login: str, task_name: str, task_status: str, task_deadline: int):
     """Description."""
-    db.add_task(user_login, task_name, task_status, task_deadline)
+    db.add_task(login, task_name, task_status, task_deadline)
 
 
 # @router.get("/user/list/task/status")

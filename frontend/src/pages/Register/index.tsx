@@ -3,16 +3,22 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.scss";
 
-type CreateUser = {
-  user_login: string;
-  user_password: string;
+type TaskInterface = {
+  name: string;
+  status: string;
+  deadline: number;
+};
+
+type UserInterface = {
+  login: string;
+  password: string;
+  tasks: Array<TaskInterface>;
 };
 
 async function addUserToApi(login: string, password: string) {
   try {
-    const { data } = await axios.post<CreateUser>(
-      "https://localhost:8000/user/add",
-      { user_login: login, user_password: password },
+    const { data } = await axios.post(
+      `http://localhost:8000/user/add?login=${login}&password=${password}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -20,9 +26,6 @@ async function addUserToApi(login: string, password: string) {
         },
       }
     );
-
-    console.log(JSON.stringify(data, null, 4));
-
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -40,12 +43,13 @@ export default function Register() {
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
 
-  const addUser = () => {
+  const addUser = async () => {
     if (login !== "" && password !== "") {
       setLogin(login);
       setPassword(password);
-      let data = addUserToApi(login, password);
-      console.log(data);
+      let data = await addUserToApi(login, password);
+      localStorage.setItem("login", data.login);
+      localStorage.setItem("password", data.password);
       let path = "/";
       navigate(path);
     }
