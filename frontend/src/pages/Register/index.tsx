@@ -4,15 +4,15 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.scss";
 
 type CreateUser = {
-  login: string;
-  password: string;
+  user_login: string;
+  user_password: string;
 };
 
 async function addUserToApi(login: string, password: string) {
   try {
     const { data } = await axios.post<CreateUser>(
       "https://localhost:8000/user/add",
-      { user_login: { login }, user_password: { password } },
+      { user_login: login, user_password: password },
       {
         headers: {
           "Content-Type": "application/json",
