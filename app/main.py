@@ -1,6 +1,8 @@
 import time
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from app.api.routers import router
 
@@ -13,5 +15,18 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/docs/redoc",
 )
+origins = [
+    "http://localhost",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 logging.basicConfig(filename='info.log', encoding='utf-8', level=logging.INFO)
 app.include_router(router)
