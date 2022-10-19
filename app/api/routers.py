@@ -1,6 +1,8 @@
+import json
+
 from fastapi import APIRouter
 
-from app.db import add_user
+import app.db as db
 
 router = APIRouter()
 
@@ -12,48 +14,52 @@ def read_root():
 
 
 @router.post("/user/add")
-def read_root(user_login: str, user_password: str):
+def add_user(user_login: str, user_password: str):
     """Description."""
-    add_user(user_login, user_password)
+    db.add_user(user_login, user_password)
 
 
-@router.post("/user/list/add")
-def read_root(user_login: str, list_name: str):
+# @router.post("/user/list/add")
+# def read_root(user_login: str, list_name: str):
+#     """Description."""
+#     pass
+
+
+@router.get("/user/tasks")
+def get_tasks(user_login: str):
     """Description."""
-    pass
+    tasks = db.get_tasks(user_login)
+    return [to_json(task) for task in tasks]
+
+# @router.get("/user/lists")
+# def read_root(user_login: str):
+#     """Description."""
+#     pass
 
 
-@router.get("/user/list/tasks")
-def read_root(user_login: str, list_name: str):
+@router.get("/user/task/add")
+def add_task(user_login: str, task_name: str, task_status: str, task_deadline: int):
     """Description."""
-    pass
+    db.add_task(user_login, task_name, task_status, task_deadline)
 
 
-@router.get("/user/lists")
-def read_root(user_login: str):
-    """Description."""
-    pass
+# @router.get("/user/list/task/status")
+# def read_root(user_login: str, list_name: str, task_name: str):
+#     """Description."""
+#     pass
+#
+#
+# @router.get("/user/list/task/deadline")
+# def read_root(user_login: str, list_name: str, task_name: str):
+#     """Description."""
+#     pass
+#
+#
+# @router.post("/user/list/task/edit")
+# def read_root(user_login: str, list_name: str):
+#     """Description."""
+#     pass
 
 
-@router.get("/user/list/task")
-def read_root(user_login: str, list_name: str, task_name: str):
-    """Description."""
-    pass
-
-
-@router.get("/user/list/task/status")
-def read_root(user_login: str, list_name: str, task_name: str):
-    """Description."""
-    pass
-
-
-@router.get("/user/list/task/deadline")
-def read_root(user_login: str, list_name: str, task_name: str):
-    """Description."""
-    pass
-
-
-@router.post("/user/list/task/edit")
-def read_root(user_login: str, list_name: str):
-    """Description."""
-    pass
+def to_json(data):
+    return json.dumps(data.__dict__)
