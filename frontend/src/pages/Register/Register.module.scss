@@ -1,0 +1,29 @@
+.body {
+    margin: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputLogin {
+    margin: 2px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.inputRegister {
+    margin: 2px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.registerButton {
+    padding: 5px 10px;
+}

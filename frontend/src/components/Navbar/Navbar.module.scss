@@ -1,0 +1,14 @@
+.body {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.link {
+    font-weight: 300;
+    font-size: 20px;
+    color: black;
+    outline: none;
+    text-decoration: none;
+}
