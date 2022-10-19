@@ -31,9 +31,10 @@
 
 ### Структура API
 
-- Add user: post /user/add {login: str, password: str} {} 
+- Add user: post /user/add {login: str, password: str} {id: int} 
 - Add list: post /user/list/add {user_id: int, name: str} {id: int}
-- Get all tasks from list: get /user/list/tasks {user_id: int} {tasks: list[Task]}
-- Get task: get /user/list/task {user_id: int} {name: str, status: str, deadline: str}
-- Get task feature: get /user/list/task/<status, name, deadline> {} {data: str}
-- Edit task: post /user/list/task/edit {user_id: int, feture1: str ... } {}
+- Get all tasks from list: get /user/<list id>/tasks {user_id: int} {tasks: list[Task]}
+- Get task: get /user/<list id>/<task id> {user_id: int} {name: str, status: str, deadline: str}
+- Get task feature: get /user/<list id>/<task id>/<status, name, deadline> {} {data: str}
+- Edit task: post /user/<list id>/<task id>/edit {user_id: int, feture1: str ... } {}
+- Delete task: post /user/<list id>/<task id>/delete {user_id: int} {}
