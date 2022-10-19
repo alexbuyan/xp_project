@@ -21,4 +21,9 @@
 
 ### Структура API
 
--
+- post /user/add
+- post /user/list/add
+- get /user/<list id>/tasks
+- get /user/<list id>/<task id>
+- get /user/<list id>/<task id>/status
+- post /user/<list id>/<task id>/
