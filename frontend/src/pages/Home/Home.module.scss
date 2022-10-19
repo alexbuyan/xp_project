@@ -10,3 +10,49 @@
     font-size: 40px;
     font-weight: 500;
 }
+
+.addTask {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.addButton {
+    margin-top: 10px;
+}
+
+.separator {
+    border: 1px solid black;
+    width: 300px;
+    margin: 10px;
+}
+
+.todoList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.todo {
+    margin: 5px;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.empty {
+    p {
+        font-size: 25px;
+        font-weight: 300;
+    }
+}
