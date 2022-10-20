@@ -16,7 +16,7 @@ def read_root():
 @router.post("/user/add")
 def add_user(login: str, password: str):
     """Description."""
-    return db.add_user(login, password)
+    return {'user': db.add_user(login, password)}
 
 
 # @router.post("/user/list/add")
@@ -28,9 +28,12 @@ def add_user(login: str, password: str):
 @router.get("/user/tasks")
 def get_tasks(login: str):
     """Description."""
-    tasks = db.get_tasks(login)
-    print(tasks)
-    return [to_json(task) for task in tasks]
+    try:
+        tasks = db.get_tasks(login)
+    except Exception as error:
+        return {'error': str(error)}
+    return {'tasks': tasks}
+
 
 # @router.get("/user/lists")
 # def read_root(user_login: str):
@@ -41,11 +44,11 @@ def get_tasks(login: str):
 @router.post("/user/task/add")
 def add_task(login: str, task_name: str, task_status: str, task_deadline: int):
     """Description."""
-    task = db.add_task(login, task_name, task_status, task_deadline)
-    print(task)
-    if (task == None):
-        return {}
-    return to_json(task)
+    try:
+        task = db.add_task(login, task_name, task_status, task_deadline)
+    except Exception as error:
+        return {'error': str(error)}
+    return {'task': task}
 
 
 # @router.get("/user/list/task/status")
