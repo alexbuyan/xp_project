@@ -23,6 +23,10 @@
     border-radius: 5px;
 }
 
+.addInput {
+    margin-bottom: 5px;
+}
+
 .addButton {
     margin-top: 10px;
 }
@@ -48,6 +52,23 @@
     border-radius: 5px;
     font-size: 25px;
     font-weight: 300;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todoParams {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+        margin: 5px;
+        font-size: 15px;
+    }
 }
 
 .empty {

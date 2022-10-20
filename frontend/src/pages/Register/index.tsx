@@ -3,18 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.scss";
 
-type TaskInterface = {
-  name: string;
-  status: string;
-  deadline: number;
-};
-
-type UserInterface = {
-  login: string;
-  password: string;
-  tasks: Array<TaskInterface>;
-};
-
 async function addUserToApi(login: string, password: string) {
   try {
     const { data } = await axios.post(
