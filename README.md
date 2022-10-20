@@ -1,5 +1,17 @@
 # Проект по SE
 
+## Что успели на паре
+
+- Составить требования
+- Написать frontend
+- Написать backend
+- 2 части не связаны друг с другом (Столкнулись с ошибкой CORS policy)
+
+## Что доделали потом
+
+- Починили ошибку CORS policy
+- Связали backend и frontend
+
 ## Требования
 
 - Регистрация пользователя (логин, пароль)
@@ -8,7 +20,6 @@
 - Получение списка со всеми задачами
 - Редактирование параметров задачи в списке
 - Удаление задачи из списка
-
 
 ## Frontend
 
@@ -31,7 +42,7 @@
 
 ### Структура API
 
-- Add user: post /user/add {login: str, password: str} {id: int} 
+- Add user: post /user/add {login: str, password: str} {id: int}
 - Add list: post /user/list/add {user_id: int, name: str} {id: int}
 - Get all tasks from list: get /user/`list id`/tasks {user_id: int} {tasks: list[Task]}
 - Get task: get /user/`list id`/`task id` {user_id: int} {name: str, status: str, deadline: str}
