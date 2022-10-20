@@ -48,7 +48,7 @@ def add_task(login: str, task_name: str, task_status: str, task_deadline: int):
         task = db.add_task(login, task_name, task_status, task_deadline)
     except Exception as error:
         return {'error': str(error)}
-    return {'task': task}
+    return task
 
 
 # @router.get("/user/list/task/status")

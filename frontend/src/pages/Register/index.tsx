@@ -36,8 +36,8 @@ export default function Register() {
       setLogin(login);
       setPassword(password);
       let data = await addUserToApi(login, password);
-      localStorage.setItem("login", data.login);
-      localStorage.setItem("password", data.password);
+      localStorage.setItem("login", data.user.login);
+      localStorage.setItem("password", data.user.password);
       let path = "/";
       navigate(path);
     }

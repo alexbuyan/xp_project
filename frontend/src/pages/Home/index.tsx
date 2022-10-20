@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Home.module.scss";
 import axios from "axios";
 
@@ -36,9 +36,13 @@ async function assignTaskToUser(
   }
 }
 
-async function getTasks(login: string) {
+async function getTasks() {
   try {
-    const { data } = await axios.post(
+    let login = localStorage.getItem("login");
+    if (login === null) {
+      login = "";
+    }
+    const { data } = await axios.get(
       `http://0.0.0.0:8000/user/tasks?login=${login}`,
       {
         headers: {
@@ -60,14 +64,20 @@ async function getTasks(login: string) {
 }
 
 export default function Home() {
-  let login = localStorage.getItem("login");
-  if (login === null) {
-    login = "";
-  }
   const [todos, setTodos] = useState<TaskInterface[]>([]);
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
   const [deadlineStr, setDeadlineStr] = useState("");
+
+  async function fetchTasks() {
+    let res = await getTasks();
+    let tasks = res.tasks;
+    setTodos(tasks);
+  }
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   const addTodo = async () => {
     if (name !== "" && status !== "" && deadlineStr !== "") {
