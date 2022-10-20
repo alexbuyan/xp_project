@@ -126,19 +126,15 @@ export default function Home() {
       <div className={styles.separator} />
       {todos?.length > 0 ? (
         <ul className={styles.todoList}>
-          {todos.map((todo, index) =>
-            todo ? (
-              <li className={styles.todo} key={index}>
-                <h1>{todo.name}</h1>
-                <div className={styles.todoParams}>
-                  <p>Статус: {todo.status}</p>
-                  <p>Дедлайн: {todo.deadline}</p>
-                </div>
-              </li>
-            ) : (
-              <li key={index}></li>
-            )
-          )}
+          {todos.map((todo, index) => (
+            <li className={styles.todo} key={index}>
+              <h1>{todo.name}</h1>
+              <div className={styles.todoParams}>
+                <p>Статус: {todo.status}</p>
+                <p>Дедлайн: {todo.deadline}</p>
+              </div>
+            </li>
+          ))}
         </ul>
       ) : (
         <div className={styles.empty}>

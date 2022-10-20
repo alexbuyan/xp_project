@@ -32,8 +32,8 @@ def add_task(login: str, task_name: str, task_status: str, task_deadline: int):
     if user:
         # print(user)
         # print(user.tasks)
-        user.tasks.append(
-            Task(name=task_name, status=task_status, deadline=task_deadline))
-        return user.tasks
-    else:
-        return []
+        task = Task(name=task_name, status=task_status, deadline=task_deadline)
+        user.tasks.append(task)
+        print(task)
+        return task
+    return None

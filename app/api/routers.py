@@ -41,9 +41,11 @@ def get_tasks(login: str):
 @router.post("/user/task/add")
 def add_task(login: str, task_name: str, task_status: str, task_deadline: int):
     """Description."""
-    tasks = db.add_task(login, task_name, task_status, task_deadline)
-    print(tasks)
-    return [to_json(task) for task in tasks]
+    task = db.add_task(login, task_name, task_status, task_deadline)
+    print(task)
+    if (task == None):
+        return {}
+    return to_json(task)
 
 
 # @router.get("/user/list/task/status")
