@@ -28,10 +28,10 @@ async function assignTaskToUser(
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);
-      return error.message;
+      return error;
     } else {
       console.log("unexpected error: ", error);
-      return "An unexpected error occurred";
+      return error;
     }
   }
 }
@@ -55,10 +55,10 @@ async function getTasks() {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("error message: ", error.message);
-      return error.message;
+      return error;
     } else {
       console.log("unexpected error: ", error);
-      return "An unexpected error occurred";
+      return error;
     }
   }
 }
@@ -71,6 +71,12 @@ export default function Home() {
 
   async function fetchTasks() {
     let res = await getTasks();
+    if (res.response?.status === 422) {
+      alert(
+        "Bad request. Name and status must be text and deadline is a number"
+      );
+      return;
+    }
     let tasks = res.tasks;
     setTodos(tasks);
   }
@@ -87,7 +93,16 @@ export default function Home() {
         login = "";
       }
       let newTodo = await assignTaskToUser(login, name, status, deadline);
-      console.log(newTodo);
+      if (newTodo.error === "No such user") {
+        alert("Please register before creating tasks");
+        return;
+      }
+      if (newTodo.response?.status === 422) {
+        alert(
+          "Bad request. Name and status must be text and deadline is a number"
+        );
+        return;
+      }
       setTodos([...todos, newTodo]);
       setName("");
       setStatus("");
