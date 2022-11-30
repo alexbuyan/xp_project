@@ -13,6 +13,9 @@ db_lists: Dict[str, List[TaskList]] = {
 
 
 def add_user(login: str, password: str):
+    user = find_user(login)
+    if user:
+        raise Exception('Such user exists')
     user = User(login=login, password=password, lists=[])
     logging.info('new user: ' + str(user))
     db_users.append(user)
@@ -57,7 +60,9 @@ def add_list(login: str, list_name: str):
     if login in db_lists:
         lst = get_list(login, list_name)
         if not lst:
-            db_lists[login].append(TaskList(name=list_name, tasks=[]))
+            task_list = TaskList(name=list_name, tasks=[])
+            db_lists[login].append(task_list)
+            return task_list
         else:
             raise Exception('Such list exists')
     else:
