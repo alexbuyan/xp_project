@@ -32,7 +32,7 @@ def get_lists(login: str):
         lists = db.get_all_lists(login)
     except Exception as error:
         return {'error': str(error)}
-    return {'tasks': lists}
+    return {'lists': lists}
 
 
 @router.get("/user/list/tasks")
